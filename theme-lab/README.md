@@ -267,7 +267,10 @@ Two things about this loop:
   changes need a refresh, and those need Desktop closed and reopened first.
 - **Screenshots can be taken before the render finishes.** If a visual comes back blank,
   take the screenshot again before you start debugging. This is common and it will fool you
-  at least once.
+  at least once. The blank case is the kind one; the half-rendered case is worse. A matrix
+  and a table are the slowest visuals on a page, and caught mid-render they come back with
+  their rows present but washed out — which looks exactly like a contrast bug in the theme,
+  not like a race. Give the page a few seconds after the reload and take it again.
 
 ---
 
@@ -900,6 +903,7 @@ properly beats a beautiful one that does not.
 | One visual ignores every theme swap | It has a colour set directly on it. Find and delete that colour — no replacement needed; removing it lets the theme through. |
 | A property you set does nothing at all | Very common, and usually the value's *type* is wrong rather than the name. Several Power BI properties documented as text actually want a number. When a whole visual goes blank rather than merely unstyled, suspect this first. |
 | A visual is blank right after a reload | Take the screenshot again. Renders are often still in progress. |
+| A matrix or table is legible but washed out, and only in some themes | The same race, one stage later: the visual was caught mid-render. It reads as a contrast bug, which is what makes it expensive. Wait a few seconds after the reload and recapture before changing a single token. |
 | Text is invisible in the dark theme | A colour token is missing from that theme, so it fell back to a default that matches the background. Check the token set has every role the other one has. |
 | The build reports a contrast FAIL | Two colours are too close. Darken the text token or lighten the background token — do not lower the threshold. |
 | Validation reports a schema warning | Expected. The validator downloads schemas from the internet and continues without them. `errors 0` is what matters. |
