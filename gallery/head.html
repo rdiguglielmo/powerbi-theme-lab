@@ -1,0 +1,154 @@
+<title>EDGAR Dashboard in Six Themes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#EDEEF1; --surface:#FFFFFF; --faint:#F5F6F8;
+  --ink:#14161A; --muted:#61666F; --dim:#868C95;
+  --hairline:#D8DBE1; --hairline-soft:#E6E8ED;
+  --pill-bg:#14161A; --pill-ink:#FFFFFF;
+  --shadow:0 1px 2px rgba(20,22,26,.06), 0 8px 24px -12px rgba(20,22,26,.18);
+  --scrim:rgba(14,16,19,.88);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1013; --surface:#171A1E; --faint:#1E2126;
+    --ink:#E7E9EC; --muted:#969CA6; --dim:#767C86;
+    --hairline:#282C32; --hairline-soft:#212429;
+    --pill-bg:#E7E9EC; --pill-ink:#0E1013;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --scrim:rgba(6,7,9,.92);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1013; --surface:#171A1E; --faint:#1E2126;
+  --ink:#E7E9EC; --muted:#969CA6; --dim:#767C86;
+  --hairline:#282C32; --hairline-soft:#212429;
+  --pill-bg:#E7E9EC; --pill-ink:#0E1013;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --scrim:rgba(6,7,9,.92);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px; margin:0 auto; padding:40px 28px 72px}
+
+/* ---------- header ---------- */
+.masthead{display:flex; flex-direction:column; gap:18px; padding-bottom:26px; border-bottom:1px solid var(--hairline)}
+h1{
+  font-family:Newsreader,Georgia,serif; font-weight:300; font-size:clamp(34px,5.2vw,54px);
+  line-height:1.04; letter-spacing:-.015em; margin:0; text-wrap:balance;
+}
+.standfirst{margin:0; max-width:63ch; color:var(--muted); font-size:16px}
+.standfirst strong{color:var(--ink); font-weight:500}
+.facts{display:flex; flex-wrap:wrap; gap:8px 0; list-style:none; margin:0; padding:0}
+.facts li{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:.04em;
+  color:var(--muted); padding:0 14px; border-left:1px solid var(--hairline);
+}
+.facts li:first-child{padding-left:0; border-left:0}
+.facts b{color:var(--ink); font-weight:500}
+
+/* ---------- controls ---------- */
+.controls{display:flex; flex-direction:column; gap:20px; padding:26px 0; border-bottom:1px solid var(--hairline)}
+.axis{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+.axis-label{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--dim); white-space:nowrap;
+}
+.seg{display:inline-flex; border:1px solid var(--hairline); border-radius:999px; padding:3px; gap:2px; background:var(--surface)}
+.seg button{
+  font:inherit; font-size:13px; border:0; background:none; color:var(--muted);
+  padding:5px 15px; border-radius:999px; cursor:pointer; white-space:nowrap;
+}
+.seg button[aria-pressed="true"]{background:var(--pill-bg); color:var(--pill-ink)}
+.seg button:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+
+/* align-content is NOT cosmetic here, and it pairs with the flex-wrap:nowrap on
+   the rail's .axis in body.html. .axis carries flex-wrap:wrap for the segmented
+   control, but that axis is overridden to a column, and a wrapping column flex
+   container hands this grid a definite height. The auto rows then stretch to
+   fill it: every chip grew to 260px around 98px of content and the gallery was
+   pushed off the first screen, with nothing erroring and the chips still looking
+   like chips. nowrap fixes the container; this keeps the rows at their own
+   height regardless. */
+.rail{display:grid; grid-template-columns:repeat(auto-fit,minmax(184px,1fr)); align-content:start; gap:10px; margin:0; padding:0; list-style:none}
+.chip{
+  position:relative; width:100%; text-align:left; cursor:pointer;
+  background:var(--surface); border:1px solid var(--hairline); border-radius:3px;
+  padding:12px 13px 11px; display:flex; flex-direction:column; gap:9px; font:inherit; color:inherit;
+  transition:border-color .12s ease, transform .12s ease;
+}
+.chip:hover{border-color:var(--dim)}
+.chip:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.chip[aria-pressed="true"]{border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
+.chip-top{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
+.chip-name{font-family:Newsreader,Georgia,serif; font-size:19px; font-weight:400; line-height:1.1}
+.chip-ratio{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--dim); white-space:nowrap; font-variant-numeric:tabular-nums}
+.swatches{display:flex; height:16px; border:1px solid var(--hairline-soft)}
+.swatches span{flex:1}
+.shipped{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--pill-ink); background:var(--pill-bg); padding:2px 7px; border-radius:2px; align-self:flex-start;
+}
+
+/* ---------- gallery ---------- */
+.gallery{display:grid; gap:38px; padding-top:34px}
+.gallery.by-page{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+figure{margin:0; display:flex; flex-direction:column; gap:11px}
+figcaption{display:flex; align-items:baseline; gap:11px; flex-wrap:wrap}
+.cap-num{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--dim);
+  font-variant-numeric:tabular-nums; padding-top:2px;
+}
+.cap-title{font-family:Newsreader,Georgia,serif; font-size:22px; font-weight:400; line-height:1.15}
+.cap-note{color:var(--muted); font-size:13.5px; flex-basis:100%; max-width:70ch; margin:0}
+.shot{
+  display:block; width:100%; height:auto; border:1px solid var(--hairline);
+  border-radius:2px; box-shadow:var(--shadow); background:var(--faint);
+  cursor:zoom-in; transition:border-color .12s ease;
+}
+.shot:hover{border-color:var(--dim)}
+.shot:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+
+/* ---------- lightbox ---------- */
+dialog.lb{
+  border:0; padding:0; background:transparent; max-width:100vw; max-height:100vh;
+  width:100%; height:100%; margin:0; color:var(--ink);
+}
+dialog.lb::backdrop{background:var(--scrim)}
+.lb-inner{width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:24px}
+.lb-inner img{max-width:100%; max-height:calc(100vh - 96px); object-fit:contain; border-radius:2px; box-shadow:0 24px 64px -24px rgba(0,0,0,.7)}
+.lb-bar{display:flex; align-items:center; gap:14px; color:#fff}
+.lb-cap{font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.06em}
+.lb-close{
+  font:inherit; font-size:12px; color:#fff; background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28); border-radius:999px; padding:4px 13px; cursor:pointer;
+}
+.lb-close:focus-visible{outline:2px solid #fff; outline-offset:2px}
+
+/* ---------- footer ---------- */
+.colophon{
+  margin-top:56px; padding-top:24px; border-top:1px solid var(--hairline);
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:26px;
+}
+.colophon h2{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--dim); margin:0 0 7px; font-weight:500;
+}
+.colophon p{margin:0; color:var(--muted); font-size:13.5px; max-width:52ch}
+.colophon em{font-style:normal; color:var(--ink)}
+
+@media (max-width:640px){
+  .wrap{padding:28px 16px 56px}
+  .gallery.by-page{grid-template-columns:1fr}
+  .facts li{padding:0 10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>

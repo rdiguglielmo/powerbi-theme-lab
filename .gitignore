@@ -1,0 +1,11 @@
+# The embedded build of the gallery: two megabytes of base64 that git would
+# store afresh every time any one screenshot changes. The MODE is kept - it is
+# what the Artifact needs and what makes the page work offline - but the output
+# is rebuilt on demand rather than versioned:
+#
+#   node gallery/assemble.mjs --embed
+gallery/theme-gallery.html
+
+# OS
+.DS_Store
+Thumbs.db
