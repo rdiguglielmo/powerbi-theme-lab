@@ -1,6 +1,8 @@
 <!doctype html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Three pages of a Power BI report on SEC EDGAR XBRL filings, rendered in each of six themes compiled from design tokens. Same data, same layout, only the palette changes.">
 <title>EDGAR Dashboard in Six Themes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,8 +114,11 @@ figcaption{display:flex; align-items:baseline; gap:11px; flex-wrap:wrap}
 }
 .cap-title{font-family:Newsreader,Georgia,serif; font-size:22px; font-weight:400; line-height:1.15}
 .cap-note{color:var(--muted); font-size:13.5px; flex-basis:100%; max-width:70ch; margin:0}
+/* Every render is cropped and encoded to exactly 1400x783 by conv.ps1, so the box can be
+   reserved before the JPEG arrives. Without it the lazy images below the fold each shift the
+   page as they load, which is worst on the slow connection that needed lazy loading. */
 .shot{
-  display:block; width:100%; height:auto; border:1px solid var(--hairline);
+  display:block; width:100%; height:auto; aspect-ratio:1400/783; border:1px solid var(--hairline);
   border-radius:2px; box-shadow:var(--shadow); background:var(--faint);
   cursor:zoom-in; transition:border-color .12s ease;
 }
@@ -147,6 +152,12 @@ dialog.lb::backdrop{background:var(--scrim)}
 }
 .colophon p{margin:0; color:var(--muted); font-size:13.5px; max-width:52ch}
 .colophon em{font-style:normal; color:var(--ink)}
+.colophon a{
+  color:var(--ink); text-decoration:underline; text-decoration-color:var(--hairline);
+  text-underline-offset:2px;
+}
+.colophon a:hover{text-decoration-color:var(--ink)}
+.colophon a:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
 
 @media (max-width:640px){
   .wrap{padding:28px 16px 56px}
@@ -204,6 +215,12 @@ dialog.lb::backdrop{background:var(--scrim)}
       <h2>Contrast</h2>
       <p>The ratio on each theme is its primary text against its panel colour, measured rather than
         assumed. All six clear <em>WCAG AA</em> for body text by a wide margin.</p>
+    </div>
+    <div>
+      <h2>Source</h2>
+      <p><a href="https://github.com/rdiguglielmo/powerbi-theme-lab">powerbi-theme-lab</a> compiles
+        the six themes and assembles this page. The pipeline behind the figures is
+        <a href="https://github.com/rdiguglielmo/sec-edgar-financial-pipeline">sec-edgar-financial-pipeline</a>.</p>
     </div>
   </footer>
 </div>

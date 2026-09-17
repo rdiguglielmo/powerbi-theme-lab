@@ -235,9 +235,17 @@ const script = '\n<' + 'script>\n'
 // mojibake: the page still renders, nothing errors, and only the words are wrong.
 // The Artifact host supplied this skeleton; a file served by Pages or opened from
 // disk has to carry its own.
+//
+// `lang` is not decoration either: a page without it fails WCAG 2.1 3.1.1 at level
+// A, which would be a poor look on a page that reports contrast ratios. The
+// description is what a link preview shows when this URL is pasted somewhere.
 const preamble = '<!doctype html>\n'
+  + '<html lang="en">\n'
   + '<meta charset="utf-8">\n'
-  + '<meta name="viewport" content="width=device-width, initial-scale=1">\n';
+  + '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+  + '<meta name="description" content="Three pages of a Power BI report on SEC EDGAR XBRL '
+  + 'filings, rendered in each of six themes compiled from design tokens. Same data, same '
+  + 'layout, only the palette changes.">\n';
 
 for (const part of ['head.html', 'body.html']) {
   if (!existsSync(join(HERE, part))) {
