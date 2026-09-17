@@ -82,9 +82,11 @@ rewritten in full on every screenshot change does not belong in git history.
 
 The two PowerShell scripts beside it are for preparing the images, not for building the page.
 `gallery/conv.ps1` is the one in the loop: it crops a Power BI Desktop capture to the report canvas,
-resizes it and encodes the JPEG that lands in `docs/shots/`. `gallery/crop.ps1` is a bench tool that
-cuts out a rectangle and blows it up without smoothing, for settling an argument about a border or a
-letterform at the pixel level. Nothing calls it; you run it when you need it.
+resizes it and encodes the JPEG that lands in `docs/shots/`. Its crop rectangle is measured from
+one particular Desktop window geometry, so crop one capture and look at it before running the whole
+set. `gallery/crop.ps1` is a bench tool that cuts out a rectangle and blows it up without smoothing,
+for settling an argument about a border or a letterform at the pixel level. Nothing calls it; you
+run it when you need it.
 
 ## What runs here and what does not
 

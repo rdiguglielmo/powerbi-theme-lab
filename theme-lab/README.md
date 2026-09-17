@@ -967,6 +967,7 @@ properly beats a beautiful one that does not.
 | Text is invisible in the dark theme | A colour token is missing from that theme, so it fell back to a default that matches the background. Check the token set has every role the other one has. |
 | The build reports a contrast FAIL | Two colours are too close. Darken the text token or lighten the background token — do not lower the threshold. |
 | Validation reports a schema warning | Expected. The validator downloads schemas from the internet and continues without them. `errors 0` is what matters. |
+| Every file in the report shows as changed after a save in Desktop | Desktop rewrites what it saves: each `visual.json` moves to a newer `visualContainer` schema than the generators write, final newlines are dropped, line endings become CRLF, and synonym suggestions are added to `cultures/en-US.tmdl`. A schema warning from `validate` afterwards means the tree needs restoring, not that anything is broken. |
 
 ---
 
