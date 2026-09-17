@@ -1,0 +1,8 @@
+# Normalise all text files to LF in the repository and on checkout, so a Windows
+# checkout does not rewrite every generated file into CRLF.
+* text=auto eol=lf
+
+# Binary deliverables: never touch line endings or try to diff these.
+*.jpg binary
+*.png binary
+*.pdf binary

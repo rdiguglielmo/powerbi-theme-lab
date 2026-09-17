@@ -1,0 +1,62 @@
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>EDGAR Dashboard in Six Themes</h1>
+    <p class="standfirst">Three pages of a Power BI report built on SEC EDGAR XBRL filings for ten
+      US restaurant companies, rendered in each of the six themes the project's theme lab produces.
+      Every figure on every screenshot is the same data — <strong>only the palette changes</strong>.</p>
+    <ul class="facts">
+      <li><b>10</b> companies</li>
+      <li><b>22,604</b> facts</li>
+      <li><b>40</b> filings</li>
+      <li>SIC <b>5810</b> + <b>5812</b></li>
+      <li>FY <b>2022&ndash;2024</b></li>
+      <li><b>18</b> renders</li>
+    </ul>
+  </header>
+
+  <div class="controls">
+    <div class="axis">
+      <span class="axis-label">Compare</span>
+      <div class="seg" role="group" aria-label="Comparison mode">
+        <button type="button" id="mode-theme" aria-pressed="true">One theme, three pages</button>
+        <button type="button" id="mode-page" aria-pressed="false">One page, six themes</button>
+      </div>
+    </div>
+    <div class="axis" style="align-items:stretch; flex-direction:column; flex-wrap:nowrap; gap:11px">
+      <span class="axis-label" id="rail-label">Theme</span>
+      <div class="rail" id="rail" role="group" aria-labelledby="rail-label"></div>
+    </div>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <footer class="colophon">
+    <div>
+      <h2>What you are looking at</h2>
+      <p>Real screenshots from Power BI Desktop, cropped to the report canvas. The layout, the
+        fields and the numbers are identical across all six; the theme supplies colour, corner
+        radius and callout size, and nothing else.</p>
+    </div>
+    <div>
+      <h2>Why the charts stop at 2024</h2>
+      <p>2025 is loaded and carries <em>8,184 facts</em>, but none of annual duration yet, so it has
+        no column in any year view. Blank years are dropped rather than shown as zero.</p>
+    </div>
+    <div>
+      <h2>Contrast</h2>
+      <p>The ratio on each theme is its primary text against its panel colour, measured rather than
+        assumed. All six clear <em>WCAG AA</em> for body text by a wide margin.</p>
+    </div>
+  </footer>
+</div>
+
+<dialog class="lb" id="lb">
+  <div class="lb-inner">
+    <img id="lb-img" alt="">
+    <div class="lb-bar">
+      <span class="lb-cap" id="lb-cap"></span>
+      <button type="button" class="lb-close" id="lb-close">Close &nbsp;Esc</button>
+    </div>
+  </div>
+</dialog>
