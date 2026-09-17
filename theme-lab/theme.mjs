@@ -325,8 +325,8 @@ export function buildTheme(t) {
             { $id: 'default', show: true, lineColor: solid(c.line), weight: 1 },
           ],
           accentBar: [{ $id: 'default', show: false }],
-          // cellPadding is the gap BETWEEN tiles - what keeps the three KPIs on
-          // Executive Overview reading as three cards and not one slab.
+          // cellPadding is the gap BETWEEN tiles - what keeps the values on a
+          // multi-value card reading as separate cards and not one slab.
           // backgroundShow is layout's OWN background, separate from the
           // container `background` above, and it defaults ON: a surface slab
           // filling the whole visual, 12px proud of the tile on every side. It

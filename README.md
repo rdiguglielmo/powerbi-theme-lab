@@ -2,11 +2,10 @@
 
 A Power BI theming system generated from code, demonstrated on a real report.
 
-Everything here was built with AI. Not a single visual was positioned, coloured or adjusted by hand
-in Power BI Desktop — the pages, the harness and the theme are all written by scripts, which is the
-whole reason a theme swap can be trusted to change nothing but the palette. The design can be pushed
-considerably further than this; the point is not that it is finished, but how far a report can be
-taken this way.
+Not a single visual was positioned, coloured or adjusted by hand in Power BI Desktop — the pages,
+the harness and the theme are all written by scripts, which is the whole reason a theme swap can be
+trusted to change nothing but the palette. The design can be pushed considerably further than this;
+the point is not that it is finished, but how far a report can be taken this way.
 
 `theme-lab/` compiles a complete Power BI theme from a short list of design tokens, audits every
 colour pair it produces against the WCAG contrast formula, and rewires the report to load the
@@ -82,11 +81,11 @@ rewritten in full on every screenshot change does not belong in git history.
 
 The two PowerShell scripts beside it are for preparing the images, not for building the page.
 `gallery/conv.ps1` is the one in the loop: it crops a Power BI Desktop capture to the report canvas,
-resizes it and encodes the JPEG that lands in `docs/shots/`. Its crop rectangle is measured from
-one particular Desktop window geometry, so crop one capture and look at it before running the whole
-set. `gallery/crop.ps1` is a bench tool that cuts out a rectangle and blows it up without smoothing,
-for settling an argument about a border or a letterform at the pixel level. Nothing calls it; you
-run it when you need it.
+resizes it and encodes the JPEG that lands in `docs/shots/`. The crop rectangle is an argument, not
+a constant in the script: it is measured off one particular Desktop window, so measure your own,
+crop a single capture and look at it before running the whole set. `gallery/crop.ps1` is a bench
+tool that cuts out a rectangle and blows it up without smoothing, for settling an argument about a
+border or a letterform at the pixel level. Nothing calls it; you run it when you need it.
 
 ## What runs here and what does not
 
@@ -107,9 +106,10 @@ to live in it, and every path, field and name it needs arrives from `project.con
 up. Copying is the intended distribution model, not a shortcut — there is no package to install and
 no version to track.
 
-That claim is checkable rather than asserted: grep the folder for anything that names a report and
-you get nothing back. The only line in any of the four scripts that reaches outside `theme-lab/` is
-`import { project } from '../project.config.mjs'`.
+That claim is checkable rather than asserted, and what to check is the code rather than the
+comments: not one path, field, measure or report name is read from inside the folder — every one of
+them arrives from the config. The only line in any of the four scripts that reaches outside
+`theme-lab/` is `import { project } from '../project.config.mjs'`.
 
 The cost of distributing by copy is that copies drift. If you keep more than one, fix them together
 — the folder is small enough that a hash comparison settles it in one command.

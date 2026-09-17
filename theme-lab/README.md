@@ -332,8 +332,8 @@ Two things about this loop:
 You cannot judge a theme by reading JSON. You need to see it on real visuals.
 
 `harness.mjs` generates a page with one of every visual type worth theming — cards, bar,
-column and line charts, a table, a matrix, all three kinds of slicer, a text box, a shape, a
-button, an image. Build a theme, look at the harness, and you can see immediately that the
+column and line charts, a table, a matrix, all three kinds of slicer, a text box, a shape and
+a button. Build a theme, look at the harness, and you can see immediately that the
 table header is too light or the card border has vanished.
 
 It also works as a regression test. Swap to another theme, look at the same page, and
@@ -673,7 +673,7 @@ It prints a list of the visuals it placed and their positions. Nothing has been 
 node theme-lab/build.mjs
 ```
 
-**No arguments.** It reads which theme to use from line 26 of your config.
+**No arguments.** It reads which theme to use from the `theme:` line of your config.
 
 *What it just did:* turned your colour decisions into the several-thousand-line file Power BI
 expects, saved it under a brand-new filename, rewired the four places the report refers to
